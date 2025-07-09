@@ -1,11 +1,11 @@
 import { signIn } from "@/auth";
 
+//https://www.reddit.com/r/nextjs/comments/1cnnimy/is_it_possible_to_redirect_on_signin_with/ with some tweaks
+
 export function LoginButton() {
   async function handleLogin() {
     "use server";
-    await signIn("credentials", {
-      redirectTo: callBackUrl || DEFAULT_LOGIN_REDIRECT,
-    });
+    await signIn("credentials", { redirectTo: "/" });
   }
 
   return (

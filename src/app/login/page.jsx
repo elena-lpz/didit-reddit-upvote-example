@@ -14,7 +14,7 @@ export default function LogIn() {
         Return to posts
       </Link>
       <div className="max-w-screen-lg mx-auto p-4 mt-10">
-        You need to login to perfom this action <LoginButton />
+        You need to login to perfom this action <LoginButton redirectTo="/" />
       </div>
     </>
   );
