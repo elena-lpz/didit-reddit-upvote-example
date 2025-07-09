@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { LoginButton } from "@/components/LoginButton";
 import { LogoutButton } from "@/components/LogoutButton";
+import Tiptap from "@/components/Tiptap";
 
 export default async function Home() {
   const session = await auth();
@@ -49,6 +50,7 @@ export default async function Home() {
           className="text-black px-3 py-2 rounded"
           placeholder="Post content"
         />
+        <Tiptap />
         <button className="bg-green-400 px-4 py-2 text-xl text-black rounded">
           Submit post
         </button>

@@ -2,47 +2,28 @@
 
 Upvote is a Reddit-esque web application that allows users to create posts, upvote and downvote posts, and comment on posts in a multi-threaded, nested list.
 
-The project is built using Next.js with the /app router and [Tailwind CSS](https://tailwindcss.com/), and uses [Auth.js (formerly Next Auth)](https://authjs.dev/) for user authentication. The data is stored in a Postgres database, which is created and accessed with raw SQL queries using the `pg` package.
+# Requirements
 
-The project is a work in progress and is not yet complete.
+I completed all the core requirements for the project. The deployment went smoothly, and authentication is fully functional.
 
-## Features
+# Stretch goals
 
-- [x] View a list of posts
-- [x] View a single post
-- [x] Create a post
-- [x] Upvote and downvote posts
-- [x] Pagination of posts
-- [x] Comment on posts
-- [x] Nested comments (recursive lists)
-- [x] User authentication
+I successfully implemented the following stretch goals:
 
-## Setup instructions
+- Dynamic Page Titles: Added metadata to dynamically update page titles on post pages.
 
-1. Fork the repository (check "copy the main branch only") and clone your fork to your local machine
-2. Run `npm install`
-3. Create a `.env.local` file in the root directory and add the following environment variables:
-   - `DATABASE_URL` - the URL of your Postgres database (eg. the Supabase connection string)
-   - `AUTH_SECRET` - the Next Auth secret string (this can be anything at all like a password, but keep it secret!)
-   - `AUTH_GITHUB_ID` - the GitHub OAuth client ID (create yours in [Github developer settings](https://github.com/settings/developers)
-   - `AUTH_GITHUB_SECRET` - the GitHub OAuth client secret (create this in [Github developer settings](https://github.com/settings/developers))
-4. Create the database schema by running the SQL commands in `schema.sql` in your database (eg. by running the commands in Supabase Query Editor)
-5. Run `npm run dev` to start the development server
-6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the site
+- Improved Auth Error UX: Made the error experience more user-friendly when a user tries to vote without being logged in. I considered using a toast notification but ultimately opted for a redirect to a dedicated page to maintain consistency with the rest of the app—similar to how the "Add" button behaves.
 
-## Potential future features
+- Schema Constraints: Added constraints to my database schema (see schema.sql, There's a comment on there I would like some feedback on, to see if I'm understanding correctly). Interestingly, some constraints appeared to work even before explicitly defining them, though I may have misinterpreted the behavior. Regardless, the ALTER TABLE statements should now be correctly implemented.
 
-- [ ] User profiles
-- [ ] Sorting posts by recent (date posted), top (most upvotes), and most controversial (most upvotes _and_ downvotes)
-- [ ] User karma scores
-- [ ] User badges / trophies (awards for achievements like number of posts, years on the site, etc.)
-- [ ] User settings (eg. number of posts per page, theme, etc.)
-- [ ] Moderation tools / reporting or flagging objectionable comments for removable by admins
-- [ ] Searching posts (possibly using simple SQL LIKE '%some search%', or [Postgres text search](https://www.crunchydata.com/blog/postgres-full-text-search-a-search-engine-in-a-database))
-- [ ] Subreddits (separate communities, that isn't just one big list of posts, that can be created by users)
-- [ ] User notifications
-- [ ] User private messaging
-- [ ] User blocking
-- [ ] User following
-- [ ] User feed (posts from users you follow)
-- [ ] User flair
+# I did not achieve
+
+- Tiptap Integration: I attempted to integrate Tiptap as a rich text editor. It’s partially implemented. I was able to install it and render the basic template (you’ll see "hello world" on the page), but I didn’t progress much beyond that. I found the setup and documentation a bit confusing and wasn’t able to fully integrate it in time.
+
+# Things I Wanted to Improve
+
+Post-Fetching Logic Refactor: I planned to extract the post-fetching logic into a reusable getPostById(postId) function. This would have allowed me to keep the code DRY and use the same logic in both the generateMetadata() function and the main SinglePostPage component. Unfortunately, I wasn’t able to implement this refactor as I was not able to work on the project after class and needed to finish by 5pm.
+
+# Some notes
+
+I really enjoyed this exercise because it gave me the opportunity to work with code that was written by someone else. I think this more closely reflects the kind of work developers do in real-world settings, where you're often joining existing projects, reading through unfamiliar code, and making changes or improvements.

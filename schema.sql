@@ -78,3 +78,11 @@ CREATE TABLE votes (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     -- UNIQUE(user_id, post_id, vote_type)
 );
+
+-- Unique constraint for votes 
+-- https://www.w3schools.com/sql/sql_unique.asp
+
+ALTER TABLE votes
+ADD CONSTRAINT unique_user UNIQUE (user_id, post_id, vote_type)
+
+-- vote-type isn't really needed here I think? Without it the code would ensure that an user can only have one vote per post_id, regardless of what the vote_type is. But I added it to make sure the user can only vote once on a post and also once on a comment with these 2 being separate. This might be a feature to be added in the future? (comments voting). 
