@@ -3,7 +3,9 @@ import { signIn } from "@/auth";
 export function LoginButton() {
   async function handleLogin() {
     "use server";
-    await signIn();
+    await signIn("credentials", {
+      redirectTo: callBackUrl || DEFAULT_LOGIN_REDIRECT,
+    });
   }
 
   return (
