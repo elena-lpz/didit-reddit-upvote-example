@@ -3,6 +3,24 @@ import { CommentList } from "@/components/CommentList";
 import { Vote } from "@/components/Vote";
 import { db } from "@/db";
 
+//TODO STRETCH GOAL: Fix page titles on post pages to match the post title
+//generated dynamic metadata following https://staticmania.com/blog/creating-dynamic-metadata-with-nextjs
+//currently repeating query logic, we could avoid this and I might refactor the code a bit so we can reuse a getPostById function, but going for the quickets solution for now. Will check again later
+
+export async function generateMetadata({ params }) {
+  const postId = params.postId;
+
+  const { rows: posts } = await db.query(
+    `SELECT title FROM posts WHERE id = $1 LIMIT 1`,
+    [postId]
+  );
+  const post = posts[0];
+
+  return {
+    title: `${post.title} | Didit`,
+  };
+}
+
 export default async function SinglePostPage({ params }) {
   const postId = params.postId;
 
